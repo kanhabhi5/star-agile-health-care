@@ -28,7 +28,7 @@ pipeline {
                                    }
                         }
                 }
-}
+
     stage('Docker Push-Image') {
       steps {
         echo 'This stage will push my new image to the dockerhub'
