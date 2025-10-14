@@ -1,14 +1,11 @@
 pipeline {
   agent any
-     tools {
-       maven 'M2_HOME'
-           }
-     
+          
   stages {
     stage('Git Checkout') {
       steps {
         echo 'This stage is to clone the repo from github'
-        git branch: 'master', url: 'https://github.com/rohinicbabu/star-agile-health-care.git'
+        git branch: 'master', url: 'https://github.com/Pratap-mulakala/star-agile-health-care.git'
                         }
             }
     stage('Create Package') {
@@ -17,101 +14,59 @@ pipeline {
         sh 'mvn package'
                           }
             }
-    stage('Generate Test Report') {
-      steps {
-        echo 'This stage generate Test report using TestNG'
-        publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '/var/lib/jenkins/workspace/Healthcare/target/surefire-reports', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: '', useWrapperFileDirectly: true])
-                          }
-            }
+    
      stage('Create Docker Image') {
       steps {
         echo 'This stage will Create a Docker image'
-        sh 'docker build -t cbabu85/healthcare:1.0 .'
+        sh 'docker build -t pratap1371/healthcare:1.0 .'
                           }
             }
-     stage('Login to Dockerhub') {
-      steps {
-        echo 'This stage will loginto Dockerhub' 
-        withCredentials([usernamePassword(credentialsId: 'dockerloginnew', passwordVariable: 'dockerpass', usernameVariable: 'dockeruser')]) {
-        sh 'docker login -u ${dockeruser} -p ${dockerpass}'
-            }
-         }
-     }
+     stage('Docker-Login') {
+           steps {
+              withCredentials([usernamePassword(credentialsId: 'dockerhub-pwd', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+                    sh "echo $PASS | docker login -u $USER --password-stdin"
+                                   }
+                        }
+                }
+}
     stage('Docker Push-Image') {
       steps {
         echo 'This stage will push my new image to the dockerhub'
-        sh 'docker push cbabu85/healthcare:1.0'
+        sh 'docker push pratap1371/healthcare:1.0'
             }
-      }
+      } 
     stage('AWS-Login') {
       steps {
-        withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'Awsaccess', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+       withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'AWS-ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
          }
       }
     }
-    stage('Terraform Operations for test workspace') {
+    stage('setting the Kubernetes Cluster') {
       steps {
-        script {
-          sh '''
-            terraform workspace select test || terraform workspace new test
-            terraform init
-            terraform plan
-            terraform destroy -auto-approve
-          '''
+        dir('terraform_files'){
+          sh 'terraform init'
+          sh 'terraform validate'
+          sh 'terraform apply --auto-approve'
+          sh 'sleep 20'
         }
       }
     }
-    stage('Terraform destroy & apply for test workspace') {
-      steps {
-        sh 'terraform apply -auto-approve'
-      }
-    }
-    stage('get kubeconfig') {
-      steps {
-        sh 'aws eks update-kubeconfig --region us-east-1 --name test-cluster'
-        sh 'kubectl get nodes'
-      }
-    }
-    stage('Deploying the application') {
-      steps {
-        sh 'kubectl apply -f app-deploy.yml'
-        sh 'kubectl get svc'
-      }
-    }
-    stage('Terraform Operations for Production workspace') {
-      when {
-        expression {
-          return currentBuild.currentResult == 'SUCCESS'
-        }
-      }
-      steps {
-        script {
-          sh '''
-            terraform workspace select prod || terraform workspace new prod
-            terraform init
-            terraform plan
-            terraform destroy -auto-approve
-          '''
-        }
-      }
-    }
-    stage('Terraform destroy & apply for production workspace') {
-      steps {
-        sh 'terraform apply -auto-approve'
-      }
-    }
-    stage('get kubeconfig for production') {
-      steps {
-        sh 'aws eks update-kubeconfig --region us-east-1 --name prod-cluster'
-        sh 'kubectl get nodes'
-      }
-    }
-    stage('Deploying the application to production') {
-      steps {
-        sh 'kubectl apply -f app-deploy.yml'
-        sh 'kubectl get svc'
-      }
-    }
+    stage('deploy kubernetes'){
+steps{
+  sh 'sudo chmod 600 ./terraform_files/sir.pem'    
+  sh 'minikube start'
+  sh 'sleep 30'
+  sh 'sudo scp -o StrictHostKeyChecking=no -i ./terraform_files/sir.pem deployment.yml ubuntu@172.31.17.230:/home/ubuntu/'
+  sh 'sudo scp -o StrictHostKeyChecking=no -i ./terraform_files/sir.pem service.yml ubuntu@172.31.17.230:/home/ubuntu/'
+script{
+  try{
+  sh 'ssh -o StrictHostKeyChecking=no -i ./terraform_files/sir.pem ubuntu@172.31.17.230 kubectl apply -f .'
+  }catch(error)
+  {
+  sh 'ssh -o StrictHostKeyChecking=no -i ./terraform_files/sir.pem ubuntu@172.31.17.230 kubectl apply -f .'
   }
 }
- 
+}
+}
+  }
+}
