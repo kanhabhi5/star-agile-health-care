@@ -5,7 +5,7 @@ pipeline {
     stage('Git Checkout') {
       steps {
         echo 'This stage is to clone the repo from github'
-        git branch: 'master', url: 'https://github.com/Pratap-mulakala/star-agile-health-care.git'
+        git branch: 'master', url: 'https://github.com/kanhabhi5/star-agile-health-care.git'
                         }
             }
     stage('Create Package') {
@@ -56,8 +56,8 @@ steps{
   sh 'sudo chmod 600 ./terraform_files/sir.pem'    
   sh 'minikube start'
   sh 'sleep 30'
-  sh 'sudo scp -o StrictHostKeyChecking=no -i ./terraform_files/sir.pem deployment.yml ubuntu@172.31.17.230:/home/ubuntu/'
-  sh 'sudo scp -o StrictHostKeyChecking=no -i ./terraform_files/sir.pem service.yml ubuntu@172.31.17.230:/home/ubuntu/'
+  sh 'sudo scp -o StrictHostKeyChecking=no -i ./terraform_files/ubuntu.pem deployment.yml ubuntu@172.31.17.230:/home/ubuntu/'
+  sh 'sudo scp -o StrictHostKeyChecking=no -i ./terraform_files/ubuntu.pem service.yml ubuntu@172.31.17.230:/home/ubuntu/'
 script{
   try{
   sh 'ssh -o StrictHostKeyChecking=no -i ./terraform_files/sir.pem ubuntu@172.31.17.230 kubectl apply -f .'
