@@ -2,7 +2,7 @@ provider "aws" {
 region = "us-east-1"
 }
 resource "aws_instance" "kubernetes-server" {
-ami = "ami-07e075f00c26b085a"
+ami = "ami-0bbdd8c17ed981ef9"
 instance_type = "t3.medium"
 vpc_security_group_ids =["sg-032dc6ad8a190952c"]
 key_name = "ubuntu"
