@@ -1,0 +1,305 @@
+Started by user admin
+Obtained Jenkinsfile from git https://github.com/kanhabhi5/star-agile-health-care.git
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/lib/jenkins/workspace/Helathcare-proj
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/Helathcare-proj/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/kanhabhi5/star-agile-health-care.git # timeout=10
+Fetching upstream changes from https://github.com/kanhabhi5/star-agile-health-care.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.34.1'
+ > git fetch --tags --force --progress -- https://github.com/kanhabhi5/star-agile-health-care.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+Checking out Revision 3cef666b7abbe720b14477d14257d00201b968bf (refs/remotes/origin/master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 3cef666b7abbe720b14477d14257d00201b968bf # timeout=10
+Commit message: "Update Jenkinsfile"
+ > git rev-list --no-walk e078b5da4cefb2d1b38e857e03ee6411c4cf8c9b # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Git Checkout)
+[Pipeline] echo
+This stage is to clone the repo from github
+[Pipeline] git
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/Helathcare-proj/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/kanhabhi5/star-agile-health-care.git # timeout=10
+Fetching upstream changes from https://github.com/kanhabhi5/star-agile-health-care.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.34.1'
+ > git fetch --tags --force --progress -- https://github.com/kanhabhi5/star-agile-health-care.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+Checking out Revision 3cef666b7abbe720b14477d14257d00201b968bf (refs/remotes/origin/master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 3cef666b7abbe720b14477d14257d00201b968bf # timeout=10
+ > git branch -a -v --no-abbrev # timeout=10
+ > git branch -D master # timeout=10
+ > git checkout -b master 3cef666b7abbe720b14477d14257d00201b968bf # timeout=10
+Commit message: "Update Jenkinsfile"
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Create Package)
+[Pipeline] echo
+This stage will compile, test, package my application
+[Pipeline] sh
++ mvn package
+[[1;34mINFO[m] Scanning for projects...
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m-------------------< [0;36mcom.project.staragile:medicure[0;1m >-------------------[m
+[[1;34mINFO[m] [1mBuilding medicure 0.0.1-SNAPSHOT[m
+[[1;34mINFO[m] [1m--------------------------------[ jar ]---------------------------------[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-resources-plugin:3.2.0:resources[m [1m(default-resources)[m @ [36mmedicure[0;1m ---[m
+[[1;34mINFO[m] Using 'UTF-8' encoding to copy filtered resources.
+[[1;34mINFO[m] Using 'UTF-8' encoding to copy filtered properties files.
+[[1;34mINFO[m] Copying 1 resource
+[[1;34mINFO[m] Copying 32 resources
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-compiler-plugin:3.10.1:compile[m [1m(default-compile)[m @ [36mmedicure[0;1m ---[m
+[[1;34mINFO[m] Nothing to compile - all classes are up to date
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-resources-plugin:3.2.0:testResources[m [1m(default-testResources)[m @ [36mmedicure[0;1m ---[m
+[[1;34mINFO[m] Using 'UTF-8' encoding to copy filtered resources.
+[[1;34mINFO[m] Using 'UTF-8' encoding to copy filtered properties files.
+[[1;34mINFO[m] skip non existing resourceDirectory /var/lib/jenkins/workspace/Helathcare-proj/src/test/resources
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-compiler-plugin:3.10.1:testCompile[m [1m(default-testCompile)[m @ [36mmedicure[0;1m ---[m
+[[1;34mINFO[m] Nothing to compile - all classes are up to date
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-surefire-plugin:2.22.2:test[m [1m(default-test)[m @ [36mmedicure[0;1m ---[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] -------------------------------------------------------
+[[1;34mINFO[m]  T E S T S
+[[1;34mINFO[m] -------------------------------------------------------
+[[1;34mINFO[m] Running com.project.staragile.[1mMedicureApplicationTests[m
+09:12:06.508 [main] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating CacheAwareContextLoaderDelegate from class [org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate]
+09:12:06.521 [main] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating BootstrapContext using constructor [public org.springframework.test.context.support.DefaultBootstrapContext(java.lang.Class,org.springframework.test.context.CacheAwareContextLoaderDelegate)]
+09:12:06.575 [main] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating TestContextBootstrapper for test class [com.project.staragile.MedicureApplicationTests] from class [org.springframework.boot.test.context.SpringBootTestContextBootstrapper]
+09:12:06.594 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Neither @ContextConfiguration nor @ContextHierarchy found for test class [com.project.staragile.MedicureApplicationTests], using SpringBootContextLoader
+09:12:06.601 [main] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [com.project.staragile.MedicureApplicationTests]: class path resource [com/project/staragile/MedicureApplicationTests-context.xml] does not exist
+09:12:06.604 [main] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [com.project.staragile.MedicureApplicationTests]: class path resource [com/project/staragile/MedicureApplicationTestsContext.groovy] does not exist
+09:12:06.604 [main] INFO org.springframework.test.context.support.AbstractContextLoader - Could not detect default resource locations for test class [com.project.staragile.MedicureApplicationTests]: no resource found for suffixes {-context.xml, Context.groovy}.
+09:12:06.605 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.project.staragile.MedicureApplicationTests]: MedicureApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+09:12:06.669 [main] DEBUG org.springframework.test.context.support.ActiveProfilesUtils - Could not find an 'annotation declaring class' for annotation type [org.springframework.test.context.ActiveProfiles] and class [com.project.staragile.MedicureApplicationTests]
+09:12:06.734 [main] DEBUG org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider - Identified candidate component class: file [/var/lib/jenkins/workspace/Helathcare-proj/target/classes/com/project/staragile/MedicureApplication.class]
+09:12:06.767 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.project.staragile.MedicureApplication for test class com.project.staragile.MedicureApplicationTests
+09:12:06.901 [main] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - @TestExecutionListeners is not present for class [com.project.staragile.MedicureApplicationTests]: using defaults.
+09:12:06.902 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+09:12:06.931 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@7357a011, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@3406472c, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@5717c37, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@68f4865, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@4816278d, org.springframework.test.context.support.DirtiesContextTestExecutionListener@4eaf3684, org.springframework.test.context.transaction.TransactionalTestExecutionListener@40317ba2, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@3c01cfa1, org.springframework.test.context.event.EventPublishingTestExecutionListener@45d2ade3, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@727eb8cb, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@39d9314d, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@b978d10, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@5b7a8434, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@5c45d770, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@2ce6c6ec]
+09:12:06.938 [main] DEBUG org.springframework.test.context.support.AbstractDirtiesContextTestExecutionListener - Before test class: context [DefaultTestContext@4278284b testClass = MedicureApplicationTests, testInstance = [null], testMethod = [null], testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@9573584 testClass = MedicureApplicationTests, locations = '{}', classes = '{class com.project.staragile.MedicureApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@a1cdc6d, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@21b2e768, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@65b3f4a4, org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@36b4fe2a, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@2e1d27ba, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@60c6f5b], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -> true]], class annotated with @DirtiesContext [false] with mode [null].
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v2.7.4)
+
+2025-10-14 09:12:07.419  INFO 13029 --- [           main] c.p.staragile.MedicureApplicationTests   : Starting MedicureApplicationTests using Java 17.0.16 on ip-172-31-26-93 with PID 13029 (started by jenkins in /var/lib/jenkins/workspace/Helathcare-proj)
+2025-10-14 09:12:07.424  INFO 13029 --- [           main] c.p.staragile.MedicureApplicationTests   : No active profile set, falling back to 1 default profile: "default"
+2025-10-14 09:12:08.613  INFO 13029 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-10-14 09:12:08.661  INFO 13029 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 38 ms. Found 1 JPA repository interfaces.
+2025-10-14 09:12:09.483  INFO 13029 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-10-14 09:12:09.718  INFO 13029 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-10-14 09:12:09.815  INFO 13029 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-10-14 09:12:09.883  INFO 13029 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.11.Final
+2025-10-14 09:12:10.076  INFO 13029 --- [           main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2025-10-14 09:12:10.252  INFO 13029 --- [           main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2025-10-14 09:12:10.880  INFO 13029 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2025-10-14 09:12:10.889  INFO 13029 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-10-14 09:12:11.674  WARN 13029 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-14 09:12:12.075  INFO 13029 --- [           main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2025-10-14 09:12:12.455  INFO 13029 --- [           main] c.p.staragile.MedicureApplicationTests   : Started MedicureApplicationTests in 5.453 seconds (JVM running for 6.775)
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m2[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 6.311 s - in com.project.staragile.[1mMedicureApplicationTests[m
+[[1;34mINFO[m] Running com.project.staragile.[1mTestMedicureService[m
+2025-10-14 09:12:12.707  INFO 13029 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [com.project.staragile.TestMedicureService], using SpringBootContextLoader
+2025-10-14 09:12:12.708  INFO 13029 --- [           main] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [com.project.staragile.TestMedicureService]: no resource found for suffixes {-context.xml, Context.groovy}.
+2025-10-14 09:12:12.709  INFO 13029 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.project.staragile.TestMedicureService]: TestMedicureService does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-10-14 09:12:12.711  INFO 13029 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.project.staragile.MedicureApplication for test class com.project.staragile.TestMedicureService
+2025-10-14 09:12:12.714  INFO 13029 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+2025-10-14 09:12:12.715  INFO 13029 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@472dbaf5, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@25c4f621, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@619854a3, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@46ff1aad, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@6c2fea95, org.springframework.test.context.support.DirtiesContextTestExecutionListener@6ed87ccf, org.springframework.test.context.transaction.TransactionalTestExecutionListener@4d4600fb, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@7352418c, org.springframework.test.context.event.EventPublishingTestExecutionListener@60ba6631, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@4d2950ed, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@3095d06b, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@51aaa9d4, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@6292c63e, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@65bb4cb9, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@7b33deed]
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.016 s - in com.project.staragile.[1mTestMedicureService[m
+2025-10-14 09:12:12.823  INFO 13029 --- [ionShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-10-14 09:12:12.828  INFO 13029 --- [ionShutdownHook] .SchemaDropperImpl$DelayedDropActionImpl : HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down'
+2025-10-14 09:12:12.837  INFO 13029 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-10-14 09:12:12.845  INFO 13029 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+[[1;34mINFO[m] 
+[[1;34mINFO[m] Results:
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1;32mTests run: 3, Failures: 0, Errors: 0, Skipped: 0[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-jar-plugin:3.2.2:jar[m [1m(default-jar)[m @ [36mmedicure[0;1m ---[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mspring-boot-maven-plugin:2.7.4:repackage[m [1m(repackage)[m @ [36mmedicure[0;1m ---[m
+[[1;34mINFO[m] Replacing main artifact with repackaged archive
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] [1;32mBUILD SUCCESS[m
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] Total time:  10.194 s
+[[1;34mINFO[m] Finished at: 2025-10-14T09:12:13Z
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Create Docker Image)
+[Pipeline] echo
+This stage will Create a Docker image
+[Pipeline] sh
++ docker build -t kanhavisk/healthcare:1.0 .
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon  876.2MB
+Step 1/4 : FROM openjdk:11
+ ---> 47a932d998b7
+Step 2/4 : ARG JAR_FILE=target/*.jar
+ ---> Using cache
+ ---> c43397ed5364
+Step 3/4 : COPY ${JAR_FILE} app.jar
+ ---> Using cache
+ ---> f790956d20b0
+Step 4/4 : ENTRYPOINT ["java","-jar","/app.jar"]
+ ---> Using cache
+ ---> 250414666504
+Successfully built 250414666504
+Successfully tagged kanhavisk/healthcare:1.0
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Docker-Login)
+[Pipeline] withCredentials
+Masking supported pattern matches of $PASS
+[Pipeline] {
+[Pipeline] sh
+Warning: A secret was passed to "sh" using Groovy String interpolation, which is insecure.
+		 Affected argument(s) used the following variable(s): [PASS]
+		 See https://jenkins.io/redirect/groovy-string-interpolation for details.
++ echo ****
++ docker login -u kanhavisk --password-stdin
+Login Succeeded
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Docker Push-Image)
+[Pipeline] echo
+This stage will push my new image to the dockerhub
+[Pipeline] sh
++ docker push kanhavisk/healthcare:1.0
+The push refers to repository [docker.io/kanhavisk/healthcare]
+9fb302a4671a: Preparing
+7b7f3078e1db: Preparing
+826c3ddbb29c: Preparing
+b626401ef603: Preparing
+9b55156abf26: Preparing
+293d5db30c9f: Preparing
+03127cdb479b: Preparing
+9c742cd6c7a5: Preparing
+293d5db30c9f: Waiting
+03127cdb479b: Waiting
+9c742cd6c7a5: Waiting
+7b7f3078e1db: Layer already exists
+9fb302a4671a: Layer already exists
+826c3ddbb29c: Layer already exists
+b626401ef603: Layer already exists
+9b55156abf26: Layer already exists
+293d5db30c9f: Layer already exists
+9c742cd6c7a5: Layer already exists
+03127cdb479b: Layer already exists
+1.0: digest: sha256:09b53e22e06884aa7fc74779d8b93b673db45b19d6ebc407b06c1b5c938affd7 size: 2007
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (AWS-Login)
+[Pipeline] withCredentials
+Masking supported pattern matches of $AWS_ACCESS_KEY_ID or $AWS_SECRET_ACCESS_KEY
+[Pipeline] {
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (setting the Kubernetes Cluster)
+[Pipeline] dir
+Running in /var/lib/jenkins/workspace/Helathcare-proj/terraform_files
+[Pipeline] {
+[Pipeline] sh
++ terraform init
+[0m[1mInitializing the backend...[0m
+[0m[1mInitializing provider plugins...[0m
+- Reusing previous version of hashicorp/aws from the dependency lock file
+- Using previously-installed hashicorp/aws v6.16.0
+
+[0m[1m[32mTerraform has been successfully initialized![0m[32m[0m
+[0m[32m
+You may now begin working with Terraform. Try running "terraform plan" to see
+any changes that are required for your infrastructure. All Terraform commands
+should now work.
+
+If you ever set or change modules or backend configuration for Terraform,
+rerun this command to reinitialize your working directory. If you forget, other
+commands will detect it and remind you to do so if necessary.[0m
+[Pipeline] sh
++ terraform validate
+[32m[1mSuccess![0m The configuration is valid.
+[0m
+[Pipeline] sh
++ terraform apply --auto-approve
+[0m[1maws_instance.kubernetes-server: Refreshing state... [id=i-0a1fcb6ce26e9765e][0m
+
+[0m[1m[32mNo changes.[0m[1m Your infrastructure matches the configuration.[0m
+
+[0mTerraform has compared your real infrastructure against your configuration
+and found no differences, so no changes are needed.
+[0m[1m[32m
+Apply complete! Resources: 0 added, 0 changed, 0 destroyed.
+[0m
+[Pipeline] sh
++ sleep 20
+[Pipeline] }
+[Pipeline] // dir
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (deploy kubernetes)
+[Pipeline] sh
++ sudo chmod 600 ./terraform_files/ubuntu.pem
+[Pipeline] sh
++ sudo scp -o StrictHostKeyChecking=no -i ./terraform_files/ubuntu.pem deployment.yml ubuntu@3.88.179.19:/home/ubuntu/
+[Pipeline] sh
++ sudo scp -o StrictHostKeyChecking=no -i ./terraform_files/ubuntu.pem service.yml ubuntu@3.88.179.19:/home/ubuntu/
+[Pipeline] script
+[Pipeline] {
+[Pipeline] sh
++ ssh -o StrictHostKeyChecking=no -i ./terraform_files/ubuntu.pem ubuntu@3.88.179.19 kubectl apply -f .
+deployment.apps/medicure-deployment created
+service/medicure-service created
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
